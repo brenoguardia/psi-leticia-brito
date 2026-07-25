@@ -10,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
   site: sitePrefix,
-  logger: logHandlers.json({ pretty: true }),
+  logger: logHandlers.json({ pretty: true , level: 'error'}),
   devToolbar: {
     enabled: !isProduction,
     placement: 'bottom-left',
