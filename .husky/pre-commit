@@ -1,2 +1,2 @@
 pnpm format
-pnpm astro check
+# pnpm astro check

@@ -91,7 +91,7 @@ export function Menu() {
             src={logo.src}
             alt="Logo"
             className="h-full w-full object-contain"
-            loading="lazy"
+            loading="eager"
           />
         </picture>
       </div>
