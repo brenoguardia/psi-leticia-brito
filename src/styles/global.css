@@ -51,14 +51,24 @@ body {
   --color-editorial-primary-fixed: var(--editorial-primary-fixed);
   --color-editorial-primary-fixed-dim: var(--editorial-primary-fixed-dim);
   --color-editorial-on-primary: var(--editorial-on-primary);
-  --color-editorial-on-primary-fixed-variant: var(--editorial-on-primary-fixed-variant);
+  --color-editorial-on-primary-fixed-variant: var(
+    --editorial-on-primary-fixed-variant
+  );
   --color-editorial-on-surface: var(--editorial-on-surface);
   --color-editorial-on-surface-variant: var(--editorial-on-surface-variant);
-  --color-editorial-surface-container-low: var(--editorial-surface-container-low);
+  --color-editorial-surface-container-low: var(
+    --editorial-surface-container-low
+  );
   --color-editorial-surface-container: var(--editorial-surface-container);
-  --color-editorial-surface-container-high: var(--editorial-surface-container-high);
-  --color-editorial-surface-container-highest: var(--editorial-surface-container-highest);
-  --color-editorial-surface-container-lowest: var(--editorial-surface-container-lowest);
+  --color-editorial-surface-container-high: var(
+    --editorial-surface-container-high
+  );
+  --color-editorial-surface-container-highest: var(
+    --editorial-surface-container-highest
+  );
+  --color-editorial-surface-container-lowest: var(
+    --editorial-surface-container-lowest
+  );
   --color-editorial-surface-bright: var(--editorial-surface-bright);
   --color-editorial-tertiary-container: var(--editorial-tertiary-container);
   --color-editorial-tertiary-fixed-dim: var(--editorial-tertiary-fixed-dim);
@@ -319,7 +329,8 @@ body {
   --card-color-2: #ebe6e4;
   --brand: #8d0d0d;
 
-  --editorial-background: #fcf8f7;  --editorial-primary: #570013;
+  --editorial-background: #fcf8f7;
+  --editorial-primary: #570013;
   --editorial-primary-container: #800020;
   --editorial-primary-fixed: #ffdada;
   --editorial-primary-fixed-dim: #ffb3b5;

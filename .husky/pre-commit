@@ -1,2 +1,2 @@
-pnpm format
+pnpx lint-staged
 # pnpm astro check

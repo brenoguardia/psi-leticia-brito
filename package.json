@@ -11,6 +11,12 @@
     "prepare": "husky || true",
     "postinstall": "croct --no-interaction install"
   },
+  "lint-staged": {
+    "*": [
+      "pnpm format",
+      "pnpm build"
+    ]
+  },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/react": "^6.0.2",
@@ -46,6 +52,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.5",
     "croct": "^0.16.3",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0"
   }
 }
