@@ -12,7 +12,7 @@
     "postinstall": "croct --no-interaction install"
   },
   "lint-staged": {
-    "*": [
+    "*.{ts,tsx,js,jsx,json,astro,md,mdx}": [
       "pnpm format",
       "pnpm build"
     ]
