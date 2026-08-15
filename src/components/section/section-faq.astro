@@ -1,0 +1,49 @@
+---
+import { FAQ_MOCK } from "@/mock";
+import SectionContent from "./section.astro";
+
+const faqData = FAQ_MOCK;
+---
+
+<SectionContent
+  theme="light"
+  class="bg-editorial-surface-container-lowest py-24"
+  id="faq"
+>
+  <div class="mx-auto max-w-3xl px-8">
+    <h2 class="mb-16 text-center font-headline text-4xl text-editorial-primary">
+      {faqData.title}
+    </h2>
+    <div class="space-y-4">
+      {
+        faqData.faqItems.map((item) => (
+          <details class="group rounded-2xl bg-editorial-surface-container-low p-6 transition-all">
+            <summary class="flex cursor-pointer list-none items-center justify-between">
+              <span class="text-lg font-bold text-editorial-on-surface">
+                {item.question}
+              </span>
+              <span class="text-editorial-primary transition-transform group-open:rotate-180">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </span>
+            </summary>
+            <p class="mt-4 leading-relaxed text-editorial-on-surface-variant">
+              {item.answer}
+            </p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</SectionContent>

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 import logo from '@/assets/images/logo.png';
 import { menuMock } from '@/mock';
+import { env } from '@/types/env';
+import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { Icon } from '../icon';
 
 const styles = {
@@ -74,7 +75,7 @@ export function Menu() {
   return (
     <nav
       className={twMerge(
-        'fixed z-10 bg-opacity-0 bg-clip-padding shadow-md backdrop-blur-lg backdrop-filter',
+        'fixed z-50 bg-opacity-0 bg-clip-padding shadow-md backdrop-blur-lg backdrop-filter',
         styles.default,
         menuMobile && styles.mobile,
       )}
@@ -99,7 +100,7 @@ export function Menu() {
       <ul className="flex w-full flex-2 justify-around p-0 md:px-4 md:py-6">
         {menuMock.map((item, index) => (
           <li
-            className="group transition-colors duration-500 data-[theme=dark]:text-white data-[theme=light]:text-black"
+            className="group text-editorial-on-surface transition-colors duration-500 data-[theme=dark]:text-white"
             key={item.href || index}
             data-theme={theme}
           >
@@ -111,6 +112,18 @@ export function Menu() {
           </li>
         ))}
       </ul>
+
+      <a
+        href={`https://wa.me/${env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+          'Olá, eu gostaria de marcar uma sessão de psicoterapia individual.',
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-theme={theme}
+        className="mr-4 hidden rounded-full bg-linear-to-r from-editorial-primary-container to-editorial-primary-container px-6 py-2.5 font-medium text-white transition-transform hover:scale-95 md:inline-flex"
+      >
+        Agendar Consulta
+      </a>
     </nav>
   );
 }

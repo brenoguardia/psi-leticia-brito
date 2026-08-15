@@ -8,23 +8,23 @@ type MenuMockType = {
 
 export const menuMock: MenuMockType[] = [
   {
-    href: '#hero',
-    label: 'Ínicio',
-    icon: 'house',
+    href: '#sobre',
+    label: 'Sobre',
+    icon: 'user',
   },
   {
-    href: '#info',
-    label: 'Informações',
+    href: '#atendimento',
+    label: 'Atendimento',
     icon: 'book-open-text',
   },
   {
-    href: '#services',
-    label: 'Serviços',
+    href: '#especialidades',
+    label: 'Especialidades',
     icon: 'briefcase',
   },
   {
-    href: '#about',
-    label: 'Sobre mim',
-    icon: 'user',
+    href: '#faq',
+    label: 'FAQ',
+    icon: 'circle-help',
   },
 ];

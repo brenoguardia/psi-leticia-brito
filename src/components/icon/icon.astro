@@ -1,9 +1,9 @@
 ---
-import { icons, type IconProps } from '@lucide/astro';
-import { twMerge } from 'tailwind-merge';
+import { icons, type IconProps } from "@lucide/astro";
+import { twMerge } from "tailwind-merge";
 
 interface Props extends IconProps {
-  name: keyof typeof icons;
+  name: keyof typeof icons | string;
   class?: string;
   className?: string;
 }
@@ -15,7 +15,7 @@ const {
   ...restProps
 } = Astro.props;
 const className = classNameAstro || classNameReact;
-const IconComponent = icons[name];
+const IconComponent = icons[name as keyof typeof icons];
 ---
 
 <IconComponent

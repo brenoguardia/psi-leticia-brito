@@ -1,27 +1,46 @@
 ---
-import { servicesMock } from '@/mock';
-import SectionContent from './section.astro';
+import { SERVICES_MOCK, servicesMock } from "@/mock";
+import Icon from "../icon/icon.astro";
+import SectionContent from "./section.astro";
+
+const servicesData = SERVICES_MOCK;
 ---
 
-<SectionContent theme="light" class="bg-[#FAF7FB] pt-5" id="services">
-  <div class="container mx-auto max-w-7xl px-4">
-    <h2
-      class="mb-20 text-center font-serif text-4xl text-[#2e2143] italic md:text-5xl lg:text-6xl"
+<SectionContent
+  theme="light"
+  class="bg-editorial-surface-container-high py-24"
+  id="especialidades"
+>
+  <div class="mx-auto max-w-7xl px-8">
+    <div
+      class="mb-16 flex flex-col items-end justify-between gap-8 md:flex-row"
     >
-      Como posso te ajudar
-    </h2>
+      <div class="max-w-xl">
+        <h2 class="mb-4 font-headline text-4xl text-editorial-primary">
+          {servicesData.title}
+        </h2>
+        <p class="text-editorial-on-surface-variant">
+          {servicesData.description}
+        </p>
+      </div>
+    </div>
 
-    <div class="flex flex-wrap justify-center gap-6 overflow-hidden lg:gap-8">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {
-        servicesMock.map((service, _index) => (
-          <div class="group flex w-full flex-col items-start rounded-[2.5rem] border border-white/60 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] sm:w-[calc(50%-12px)] md:p-10 lg:w-[calc(33.33%-22px)] xl:w-[calc(25%-24px)]">
-            <div class="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FAF7FB] text-4xl transition-transform duration-500 group-hover:rotate-3 group-hover:scale-110">
-              {service.icon}
-            </div>
-            <h3 class="mb-4 font-bold text-[#2e2143] text-xl tracking-tight">
-              {service.title}
-            </h3>
-            <p class="font-light text-[0.95rem] text-slate-500 leading-relaxed">
+        servicesMock.map((service) => (
+          <div class="group rounded-xl border border-editorial-outline-variant/10 bg-editorial-surface-container-lowest p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+            <span class="mb-6 block text-4xl text-editorial-primary transition-transform group-hover:rotate-6">
+              <Icon
+                name={
+                  (servicesData.serviceIcons as Record<string, string>)[
+                    service.icon
+                  ] ?? "Sparkles"
+                }
+                class="size-9"
+              />
+            </span>
+            <h4 class="mb-3 text-xl font-bold">{service.title}</h4>
+            <p class="text-sm leading-relaxed text-editorial-on-surface-variant">
               {service.description}
             </p>
           </div>

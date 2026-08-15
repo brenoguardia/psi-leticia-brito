@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# opencode config (contains API keys)
+opencode.json
+
 # macOS-specific files
 .DS_Store
 

@@ -1,95 +1,97 @@
 ---
-import avatar from '@/assets/images/avatar.jpg';
-import avatarWebp from '@/assets/images/avatar.webp';
-import { env } from '@/types/env';
-import { Image } from 'astro:assets';
-import { Highlighter } from '../ui/highlighter';
-import { TypingAnimation } from '../ui/typing-animation';
+import avatar from "@/assets/images/avatar.jpg";
+import avatarWebp from "@/assets/images/avatar.webp";
+import { HERO_MOCK } from "@/mock/page.mock";
+import { Image } from "astro:assets";
+
+const heroData = HERO_MOCK;
 ---
 
 <section
-  data-section-theme="dark"
-  class="bg-[url(../assets/background.svg)] bg-cover bg-top bg-no-repeat py-20 md:bg-center md:pt-40"
+  data-section-theme="light"
   id="hero"
-  role="main"
+  class="relative flex min-h-screen items-center overflow-hidden bg-[radial-gradient(circle_at_20%_30%,rgba(128,0,32,0.05)_0%,transparent_50%),radial-gradient(circle_at_80%_70%,rgba(87,0,19,0.03)_0%,transparent_50%)] py-16 lg:min-h-[92vh] lg:pt-12"
 >
-  <div class="container mx-auto flex h-full flex-col gap-4 md:flex-row">
-    <div class="h-fit self-center md:h-full md:self-baseline">
-      <picture>
-        <source
-          srcset={avatarWebp.src}
-          type="image/webp"
-          class="h-80 w-80 rounded-full object-cover"
-        />
+  <div
+    class="mx-auto grid w-full max-w-7xl grid-cols-12 items-center gap-8 px-5 sm:px-8 lg:gap-12"
+  >
+    <div class="z-10 col-span-12 space-y-6 lg:col-span-7 lg:space-y-8">
+      <span
+        class="animate-editorial-rise inline-block rounded-full bg-editorial-primary-fixed px-4 py-1.5 font-label text-xs uppercase tracking-wider text-editorial-on-primary-fixed-variant sm:text-sm"
+        style="animation-delay: 0ms"
+      >
+        {heroData.badge}
+      </span>
 
-        <Image
-          src={avatar}
-          alt="foto de perfil de Leticia Brito"
-          loading="eager"
-          width={320}
-          height={320}
-          class="h-80 w-80 rounded-full object-cover"
-        />
-      </picture>
+      <h1
+        class="animate-editorial-rise font-headline text-4xl leading-tight text-editorial-primary sm:text-5xl md:text-6xl lg:text-7xl"
+        style="animation-delay: 90ms"
+        set:html={heroData.title}
+      />
+
+      <p
+        class="animate-editorial-rise max-w-xl text-base leading-relaxed text-editorial-on-surface-variant sm:text-lg md:text-xl"
+        style="animation-delay: 180ms"
+      >
+        {heroData.subtitle}
+      </p>
+
+      <p
+        class="animate-editorial-rise font-label text-sm text-editorial-on-surface-variant"
+        style="animation-delay: 240ms"
+      >
+        {heroData.codeIdentity}
+      </p>
+
+      <div
+        class="animate-editorial-rise flex flex-col gap-3 pt-4 sm:flex-row sm:flex-wrap sm:gap-4"
+        style="animation-delay: 300ms"
+      >
+        <a
+          href={heroData.whatsAppCtaLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full bg-linear-to-r from-editorial-primary-container to-editorial-primary-container px-8 py-4 text-center font-semibold text-editorial-on-primary shadow-lg shadow-editorial-primary-container/20 transition-all hover:-translate-y-1 hover:shadow-xl"
+        >
+          {heroData.whatsAppCtaText}
+        </a>
+        <a
+          href={heroData.aboutCtaLink}
+          class="rounded-full bg-editorial-surface-container-highest px-8 py-4 text-center font-semibold text-editorial-primary transition-all hover:bg-editorial-surface-container-high"
+        >
+          {heroData.aboutCtaText}
+        </a>
+      </div>
     </div>
 
     <div
-      class="flex flex-2 flex-col items-center text-center md:items-start md:text-start"
+      class="animate-editorial-rise relative col-span-12 mx-auto mt-10 w-full max-w-sm sm:max-w-md lg:col-span-5 lg:mt-0 lg:max-w-none"
+      style="animation-delay: 200ms"
     >
-      <div class="w-full">
-        <h2 class="font-bold text-4xl text-white">
-          <TypingAnimation
-            client:load
-            words={["Leticia Brito", "Psicóloga"]}
-            blinkCursor
-            deleteSpeed={50}
-            typeSpeed={90}
-            loop
+      <div
+        class="relative z-10 aspect-4/5 overflow-hidden rounded-[3rem] shadow-2xl"
+      >
+        <picture>
+          <source srcset={avatarWebp.src} type="image/webp" />
+          <Image
+            src={avatar}
+            alt="Psicóloga Letícia Brito"
+            loading="eager"
+            class="h-full w-full object-cover"
           />
-        </h2>
-        <p class="-mt-2 text-md text-white">
-          <Highlighter client:load action="box" color="#FF9800">
-            CRP: 12/30305
-          </Highlighter>
-        </p>
-
-        <p
-          class="my-6 text-center font-normal text-md text-white text-xl md:max-w-2xl md:text-left"
-        >
-          <Highlighter
-            client:load
-            action="highlight"
-            color="var(--brand)"
-            multiline
-          >
-            "O autoconhecimento é a bússola para o desenvolvimento pessoal"
-          </Highlighter>
-        </p>
-
-        <p
-          class="text-center font-normal text-md text-white md:max-w-2xl md:text-left"
-        >
-          Psicóloga Clínica e Organizacional
-        </p>
-
-        <p
-          class="text-center font-normal text-md text-white md:max-w-2xl md:text-left"
-        >
-          Atendimento clínico e consultoria para&nbsp;
-          <Highlighter client:load action="underline" color="var(--brand)">
-            empresas conscientes.
-          </Highlighter>
-        </p>
+        </picture>
       </div>
 
-      <a
-        href={`https://wa.me/${env.PUBLIC_WHATSAPP_NUMBER}?text=Olá%2C%20eu%20gostaria%20de%20marcar%20uma%20sessão%20de%20psicoterapia%20individual.`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-22 w-full max-w-80 rounded-md border px-6 py-4 text-center font-light text-white transition-colors duration-400 hover:bg-gray-300 hover:text-black md:mt-16"
+      <div
+        class="absolute -bottom-6 -left-6 -z-10 h-36 w-36 rounded-full bg-editorial-primary-fixed-dim/30 blur-3xl sm:h-48 sm:w-48 lg:-left-8 lg:-bottom-8"
+        aria-hidden="true"
       >
-        Agende sua consulta
-      </a>
+      </div>
+      <div
+        class="absolute -right-10 -top-10 -z-10 h-48 w-48 rounded-full bg-editorial-tertiary-fixed-dim/20 blur-[100px] sm:h-64 sm:w-64 lg:-right-12 lg:-top-12"
+        aria-hidden="true"
+      >
+      </div>
     </div>
   </div>
 </section>
