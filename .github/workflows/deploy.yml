@@ -29,12 +29,31 @@ jobs:
 
       - name: Deploy to Dokploy
         run: |
-          OUTPUT=$(curl --silent --show-error --fail --request GET '${{secrets.DOKPLOY_WEBHOOK}}')
-          if [ -z "$OUTPUT" ]; then
+          WEBHOOK_URL="${{secrets.DOKPLOY_WEBHOOK}}"
+          if [[ "$WEBHOOK_URL" == *"?"* ]]; then
+            WEBHOOK_URL="$WEBHOOK_URL&branch=${{ github.ref_name }}"
+          else
+            WEBHOOK_URL="$WEBHOOK_URL?branch=${{ github.ref_name }}"
+          fi
+          
+          RESPONSE=$(curl --silent --write-out "\n%{http_code}" --request GET "$WEBHOOK_URL")
+          
+          HTTP_BODY=$(echo "$RESPONSE" | sed '$d')
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+          
+          if [ "$HTTP_STATUS" -ne 200 ] && [ "$HTTP_STATUS" -ne 201 ]; then
+            echo "Erro: O webhook falhou com status HTTP $HTTP_STATUS."
+            echo "Resposta da API: $HTTP_BODY"
+            exit 1
+          fi
+          
+          if [ -z "$HTTP_BODY" ]; then
             echo "Erro: O webhook não retornou nenhuma resposta."
             exit 1
           fi
-          echo "Deploy acionado com sucesso: $OUTPUT"
+          
+          echo "Deploy acionado com sucesso!"
+          echo "Resposta: $HTTP_BODY"
 
   generate_tag:
     name: Generate tag
