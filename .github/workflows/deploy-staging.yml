@@ -15,6 +15,6 @@ jobs:
       name: staging
       url: https://psi-staging.leticiabritto.com
     steps:
-      - name: Deploy to Coolify
+      - name: Deploy to Dokploy
         run: |
-          curl --request GET '${{secrets.COOLIFY_WEBHOOK}}' --header 'Authorization: Bearer ${{secrets.COOLIFY_TOKEN}}'
+          curl --request GET '${{secrets.DOKPLOY_WEBHOOK}}'
