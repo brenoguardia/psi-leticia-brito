@@ -13,7 +13,7 @@ export const HERO_MOCK = {
     'Olá, eu gostaria de marcar uma sessão de psicoterapia individual.',
   )}`,
   aboutCtaText: 'Saiba mais',
-  aboutCtaLink: '#about',
+  aboutCtaLink: '#sobre',
 };
 
 export const ABOUT_MOCK = {
