@@ -498,14 +498,3 @@ body {
   background-color: var(--editorial-primary-fixed);
   color: var(--editorial-primary-container);
 }
-
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .animate-editorial-rise,
-  .reveal {
-    opacity: 1;
-    transform: none;
-    animation: none;
-    transition: none;
-  }
-}

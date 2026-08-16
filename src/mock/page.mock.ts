@@ -62,7 +62,7 @@ export const PROCESS_MOCK = {
 };
 
 export const SERVICES_MOCK = {
-  title: 'Especialidades',
+  title: 'Universo terapêutico',
   description:
     'Áreas de atuação dedicadas ao cuidado da sua saúde mental e ao desenvolvimento pessoal e profissional.',
   serviceIcons: {
@@ -142,7 +142,7 @@ export const FOOTER_MOCK = {
       text: 'Links Rápidos',
       items: [
         { href: '#sobre', label: 'Sobre mim' },
-        { href: '#especialidades', label: 'Especialidades' },
+        { href: '#especialidades', label: 'Universo terapêutico' },
         { href: '#atendimento', label: 'Atendimento' },
         { href: '#faq', label: 'Dúvidas' },
       ],
