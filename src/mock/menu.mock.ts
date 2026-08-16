@@ -19,7 +19,7 @@ export const menuMock: MenuMockType[] = [
   },
   {
     href: '#especialidades',
-    label: 'Especialidades',
+    label: 'Universo terapêutico',
     icon: 'briefcase',
   },
   {

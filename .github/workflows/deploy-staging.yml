@@ -17,4 +17,9 @@ jobs:
     steps:
       - name: Deploy to Dokploy
         run: |
-          curl --request GET '${{secrets.DOKPLOY_WEBHOOK}}'
+          OUTPUT=$(curl --silent --show-error --fail --request GET '${{secrets.DOKPLOY_WEBHOOK}}')
+          if [ -z "$OUTPUT" ]; then
+            echo "Erro: O webhook não retornou nenhuma resposta."
+            exit 1
+          fi
+          echo "Deploy acionado com sucesso: $OUTPUT"
