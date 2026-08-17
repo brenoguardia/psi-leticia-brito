@@ -1,0 +1,40 @@
+---
+import { SECTION_CTAS_MOCK } from '@/mock';
+import SectionContent from './section.astro';
+
+const sectionCtaData = SECTION_CTAS_MOCK;
+---
+
+<SectionContent
+  theme="dark"
+  class="relative overflow-hidden bg-transparent py-24 text-editorial-on-primary"
+  id="contato"
+>
+  <div
+    class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(128,0,32,0.5),transparent)] opacity-40"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-4xl px-8 text-center">
+    <h2 class="mb-8 font-headline text-4xl md:text-5xl">
+      {sectionCtaData.title}
+    </h2>
+    <p
+      class="mx-auto mb-12 max-w-2xl text-xl leading-relaxed text-editorial-primary-fixed opacity-90"
+    >
+      {sectionCtaData.description}
+    </p>
+
+    <div class="flex flex-col justify-center gap-6 sm:flex-row">
+      <a
+        href={sectionCtaData.individualUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-full bg-white px-10 py-5 text-lg font-bold text-editorial-primary-container transition-all hover:scale-105 hover:shadow-xl"
+      >
+        {sectionCtaData.ctaLabel}
+      </a>
+    </div>
+  </div>
+</SectionContent>

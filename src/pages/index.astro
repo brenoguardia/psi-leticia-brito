@@ -2,8 +2,10 @@
 import Footer from '@/components/footer/footer.astro';
 import Hero from '@/components/hero/hero.astro';
 import SectionAbout from '@/components/section/section-about.astro';
-import SectionInfo from '@/components/section/section-info.astro';
-import SectionPhrase from '@/components/section/section-phrase.astro';
+import SectionCta from '@/components/section/section-cta.astro';
+import SectionFaq from '@/components/section/section-faq.astro';
+import SectionProcess from '@/components/section/section-process.astro';
+import SectionReflection from '@/components/section/section-reflection.astro';
 import SectionServices from '@/components/section/section-services.astro';
 
 import Layout from '@/layouts/Layout.astro';
@@ -11,9 +13,11 @@ import Layout from '@/layouts/Layout.astro';
 
 <Layout>
   <Hero />
-  <SectionInfo />
-  <SectionServices />
   <SectionAbout />
-  <SectionPhrase />
+  <SectionProcess />
+  <SectionServices />
+  <SectionReflection />
+  <SectionFaq />
+  <SectionCta />
   <Footer />
 </Layout>

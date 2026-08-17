@@ -1,0 +1,69 @@
+---
+import { REFLECTIONS_MOCK } from '@/mock';
+import SectionContent from './section.astro';
+
+const reflectionsData = REFLECTIONS_MOCK;
+---
+
+<SectionContent
+  theme="dark"
+  class="bg-transparent py-24"
+  id="depoimentos"
+>
+  <div class="mx-auto max-w-7xl px-8">
+    <div class="mb-16 text-center">
+      <h2 class="font-headline text-4xl text-editorial-primary">
+        {reflectionsData.title}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      {
+        reflectionsData.reflections.map((item, index) => (
+          <div
+            class={`relative overflow-hidden rounded-[2rem] p-12 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md ${
+              index % 2 === 0
+                ? "bg-editorial-surface-bright/30"
+                : "bg-editorial-surface-container-low/30"
+            }`}
+          >
+            <div
+              class={`absolute rounded-full blur-3xl ${
+                index % 2 === 0
+                  ? "-right-10 -top-10 h-40 w-40 bg-editorial-primary-fixed-dim/10"
+                  : "-bottom-10 -left-10 h-40 w-40 bg-editorial-tertiary-fixed-dim/10"
+              }`}
+              aria-hidden="true"
+            />
+            <div class="relative z-10">
+              <span
+                class="absolute -left-6 -top-4 text-6xl text-editorial-primary/20"
+                aria-hidden="true"
+              >
+                &ldquo;
+              </span>
+              <p class="relative z-10 mb-8 font-serif text-xl italic leading-relaxed text-editorial-on-surface">
+                {item.quote}
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-editorial-primary-container text-editorial-primary-fixed">
+                  <span class="font-serif text-lg">
+                    {index === 0 ? "L" : "A"}
+                  </span>
+                </div>
+                <div>
+                  <p class="font-bold text-editorial-on-surface">
+                    {item.author}
+                  </p>
+                  <p class="text-xs uppercase tracking-widest text-editorial-on-surface-variant">
+                    {item.role}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</SectionContent>

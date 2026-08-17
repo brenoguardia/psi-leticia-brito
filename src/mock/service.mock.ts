@@ -1,6 +1,10 @@
-export const servicesMock = [
+export const servicesMock: Array<{
+  icon: string;
+  title: string;
+  description: string;
+}> = [
   {
-    icon: '🧠',
+    icon: 'Brain',
     title: 'Terapia Individual',
     description: 'Acompanhamento personalizado para suas necessidades.',
   },
@@ -30,16 +34,5 @@ export const servicesMock = [
     icon: '💼',
     title: 'Orientação profissional',
     description: 'Escolhas claras e direcionadas, para o seu sucesso.',
-  },
-  {
-    icon: '🔎',
-    title: 'Recrutamento e seleção de pessoas',
-    description: 'Avaliação psicológica para seleção de candidatos.',
-  },
-  {
-    icon: '📝',
-    title: 'Implementação da NR-1',
-    description:
-      'Gestão de riscos psicossociais e estratégias para fortalecer a saúde mental no ambiente corporativo.',
   },
 ];

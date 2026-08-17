@@ -1,106 +1,112 @@
 ---
+import { FOOTER_MOCK } from '@/mock';
 import { env } from '@/types/env';
-import { Mail, MapPin, Phone } from '@lucide/astro';
-import { Icon } from 'astro-icon/components';
+import { Icon as AstroIcon } from 'astro-icon/components';
+import Icon from '../icon/icon.astro';
 
-const currentYear = new Date().getFullYear();
+const footerData = FOOTER_MOCK;
 ---
 
 <footer
-  class="px-6 py-16 text-black bg-white"
+  class="w-full bg-editorial-surface-container-lowest pb-10"
   id="contact"
   data-section-theme="light"
 >
-  <div class="container mx-auto grid grid-cols-1 gap-12 md:grid-cols-3">
-    <div class="space-y-6">
-      <h3 class="font-extrabold text-2xl tracking-wider">
-        Psicóloga&nbsp;<span class="font-extrabold text-brand"
-          >Leticia Brito</span
-        >
-      </h3>
-
-      <p class="max-w-xs font-light leading-relaxed">
-        Psicoterapia Psicanalítica para crianças, adolescentes e adultos.
-      </p>
-
-      <p class="max-w-xs font-light leading-relaxed">
-        Atendimento presencial e online, no Brasil e para brasileiros no
-        exterior.
-      </p>
-
-      <p class="max-w-xs font-light leading-relaxed">
-        Um espaço de escuta e transformação emocional.
-      </p>
-
-      <div class="flex gap-4">
-        <a
-          href={env.PUBLIC_INSTAGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Link para o instagram"
-          class="rounded-full p-2 transition-colors hover:bg-brand active:bg-brand"
-        >
-          <Icon name="instagram" size={20} />
-        </a>
-        <a
-          href={env.PUBLIC_FACEBOOK_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Link para o facebook"
-          class="rounded-full p-2 transition-colors hover:bg-brand active:bg-brand"
-        >
-          <Icon name="facebook" size={20} />
-        </a>
-      </div>
-    </div>
-
-    <div class="space-y-6">
-      <h4 class="font-bold text-lg">Localização</h4>
-      <div class="space-y-4">
-        <div
-          class="flex items-start gap-3 transition-colors hover:text-gray-600"
-        >
-          <MapPin size={20} class="mt-1 shrink-0 text-brand" />
-          <address class="font-light not-italic">{env.PUBLIC_ADDRESS}</address>
+  <div class="mx-auto max-w-7xl px-8 py-16">
+    <div class="mb-12 grid grid-cols-1 gap-12 md:grid-cols-4">
+      <div class="space-y-6 md:col-span-2">
+        <div class="font-serif text-2xl italic text-editorial-primary">
+          {footerData.title}
         </div>
-      </div>
-    </div>
-
-    <div class="space-y-6">
-      <h4 class="font-bold text-lg">Contato</h4>
-      <div class="space-y-4">
-        <a
-          href={`https://wa.me/${env.PUBLIC_WHATSAPP_NUMBER}?text=Olá%2C%20eu%20vim%20pelo%20site`}
-          class="flex items-center gap-3 transition-colors hover:text-gray-600"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Link para o whatsapp"
-        >
-          <Phone size={20} class="text-brand" />
-          <p class="font-light">WhatsApp Business</p>
-        </a>
-        <div class="flex items-center gap-3">
-          <Mail size={20} class="text-brand" />
+        <p
+          class="max-w-sm text-editorial-on-surface-variant"
+          set:html={footerData.description}
+        />
+        <div class="flex gap-4">
           <a
-            href={`mailto:${env.PUBLIC_EMAIL}`}
-            class="flex items-center gap-3 transition-colors hover:text-gray-600"
+            href={footerData.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Link para o e-mail"
+            aria-label="Link para o instagram"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-editorial-surface-container text-editorial-primary transition-all hover:bg-editorial-primary-container hover:text-white"
           >
-            {env.PUBLIC_EMAIL}
+            <AstroIcon name="instagram" size={20} />
+          </a>
+          <a
+            href={env.PUBLIC_FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Link para o facebook"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-editorial-surface-container text-editorial-primary transition-all hover:bg-editorial-primary-container hover:text-white"
+          >
+            <AstroIcon name="facebook" size={20} />
           </a>
         </div>
+      </div>
+
+      <div>
+        <h5 class="mb-6 font-bold text-editorial-primary">
+          {footerData.menus.links.text}
+        </h5>
+        <ul class="space-y-4 text-sm text-editorial-on-surface-variant">
+          {
+            footerData.menus.links.items.map((item) => (
+              <li>
+                <a
+                  class="transition-colors hover:text-editorial-primary"
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="mb-6 font-bold text-editorial-primary">
+          {footerData.menus.about.text}
+        </h5>
+        <ul class="space-y-4 text-sm text-editorial-on-surface-variant">
+          {
+            footerData.menus.about.items.map((item) => (
+              <li class="flex items-start gap-2">
+                {item.icon && (
+                  <Icon
+                    name={item.icon}
+                    class="mt-0.5 size-4 shrink-0 text-editorial-primary"
+                  />
+                )}
+
+                {item?.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="transition-colors hover:text-editorial-primary"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <span>{item.label}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </div>
   </div>
 
   <div
-    class="container mx-auto mt-16 flex flex-col items-center justify-between gap-4 border-white/10 border-t pt-8 font-light text-sm md:flex-row"
+    class="flex flex-col items-center justify-between gap-6 border-t border-editorial-outline-variant/40 pt-12 md:flex-row"
   >
-    <p class="font-medium">
-      © {currentYear} Psicóloga Leticia Brito. Todos os direitos reservados.
+    <p class="text-sm text-editorial-on-surface-variant">
+      {footerData.others.text}
     </p>
-    <p class="font-medium">CRP 12/30305</p>
+    <p class="text-sm text-editorial-on-surface-variant">
+      {footerData.others.codeIdentity}
+    </p>
   </div>
 </footer>

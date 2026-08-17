@@ -1,0 +1,145 @@
+---
+---
+
+<div class="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-black">
+  <canvas id="bg-video-canvas" class="absolute inset-0 h-full w-full"></canvas>
+  <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const canvas = document.getElementById('bg-video-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+
+  const FRAME_COUNT = 240;
+  const LERP_FACTOR = 0.1; // 0.0 = instant, lower = more lag/smooth
+
+  const getFrameUrl = (index: number) =>
+    `/frames/ezgif-frame-${String(index).padStart(3, '0')}.jpg`;
+
+  // targetIndex: where scroll wants to go
+  // displayIndex: the smoothly interpolated position (fractional)
+  let targetIndex  = 0;
+  let displayIndex = 0;
+  let rafId: number | null = null;
+
+  function lerp(a: number, b: number, t: number) {
+    return a + (b - a) * t;
+  }
+
+  // Resize canvas resolution to match display
+  function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.style.width  = '100%';
+    canvas.style.height = '100%';
+    canvas.width  = Math.round(window.innerWidth  * dpr);
+    canvas.height = Math.round(window.innerHeight * dpr);
+    drawBlended(displayIndex);
+  }
+
+  // Draw a single image with object-fit: cover behaviour
+  function drawImage(img: HTMLImageElement) {
+    if (!ctx || !img?.complete || img.naturalWidth === 0) return;
+    const dpr     = window.devicePixelRatio || 1;
+    const canvasW = canvas.width  / dpr;
+    const canvasH = canvas.height / dpr;
+    const hRatio  = canvasW / img.naturalWidth;
+    const vRatio  = canvasH / img.naturalHeight;
+    const ratio   = Math.max(hRatio, vRatio);
+    const drawW   = img.naturalWidth  * ratio;
+    const drawH   = img.naturalHeight * ratio;
+    const x       = (canvasW - drawW) / 2;
+    const y       = (canvasH - drawH) / 2;
+    ctx.drawImage(img, x, y, drawW, drawH);
+  }
+
+  // Cross-fade between the two surrounding frames for a fractional index
+  function drawBlended(fractionalIndex: number) {
+    if (!ctx) return;
+
+    const dpr     = window.devicePixelRatio || 1;
+    const canvasW = canvas.width  / dpr;
+    const canvasH = canvas.height / dpr;
+
+    const lower = Math.floor(fractionalIndex);
+    const upper = Math.min(lower + 1, FRAME_COUNT - 1);
+    const blend = fractionalIndex - lower; // 0..1 blend towards upper frame
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, canvasW, canvasH);
+
+    // Draw lower frame at full opacity
+    ctx.globalAlpha = 1;
+    drawImage(images[lower]);
+
+    // Overlay upper frame with increasing opacity (cross-fade)
+    if (blend > 0.001 && upper !== lower) {
+      ctx.globalAlpha = blend;
+      drawImage(images[upper]);
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+
+  // RAF loop: lerp displayIndex toward targetIndex, then blend frames
+  function tick() {
+    displayIndex = lerp(displayIndex, targetIndex, LERP_FACTOR);
+    drawBlended(displayIndex);
+
+    // Keep ticking until close enough to target
+    if (Math.abs(displayIndex - targetIndex) > 0.05) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      displayIndex = targetIndex;
+      drawBlended(displayIndex);
+      rafId = null;
+    }
+  }
+
+  function startTick() {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+
+  // Pre-load all images
+  const images: HTMLImageElement[] = [];
+
+  for (let i = 1; i <= FRAME_COUNT; i++) {
+    const img = new Image();
+    if (i === 1) {
+      img.onload = () => {
+        resizeCanvas();
+        drawBlended(0);
+      };
+    }
+    img.src = getFrameUrl(i);
+    images.push(img);
+  }
+
+  // Fallback: first image already in cache
+  if (images[0]?.complete && images[0].naturalWidth > 0) {
+    resizeCanvas();
+    drawBlended(0);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+
+  // Map scroll progress → target frame index, RAF handles the smooth transition
+  ScrollTrigger.create({
+    trigger: document.body,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: true,
+    onUpdate(self) {
+      targetIndex = self.progress * (FRAME_COUNT - 1);
+      startTick();
+    },
+  });
+</script>
