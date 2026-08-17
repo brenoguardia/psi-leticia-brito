@@ -6,8 +6,8 @@ const faqData = FAQ_MOCK;
 ---
 
 <SectionContent
-  theme="light"
-  class="bg-editorial-surface-container-lowest py-24"
+  theme="dark"
+  class="bg-transparent py-24"
   id="faq"
 >
   <div class="mx-auto max-w-3xl px-8">
@@ -17,7 +17,7 @@ const faqData = FAQ_MOCK;
     <div class="space-y-4">
       {
         faqData.faqItems.map((item) => (
-          <details class="group rounded-2xl bg-editorial-surface-container-low p-6 transition-all">
+          <details class="group rounded-2xl bg-editorial-surface-container-low/40 backdrop-blur-sm p-6 transition-all">
             <summary class="flex cursor-pointer list-none items-center justify-between">
               <span class="text-lg font-bold text-editorial-on-surface">
                 {item.question}

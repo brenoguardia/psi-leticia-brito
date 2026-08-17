@@ -7,8 +7,8 @@ const servicesData = SERVICES_MOCK;
 ---
 
 <SectionContent
-  theme="light"
-  class="bg-editorial-surface-container-high py-24"
+  theme="dark"
+  class="bg-transparent py-24"
   id="especialidades"
 >
   <div class="mx-auto max-w-7xl px-8">
@@ -28,7 +28,7 @@ const servicesData = SERVICES_MOCK;
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {
         servicesMock.map((service) => (
-          <div class="group rounded-xl border border-editorial-outline-variant/10 bg-editorial-surface-container-lowest p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+          <div class="group rounded-xl border border-editorial-outline-variant/10 bg-editorial-surface-container-lowest/30 backdrop-blur-sm p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
             <span class="mb-6 block text-4xl text-editorial-primary transition-transform group-hover:rotate-6">
               <Icon
                 name={

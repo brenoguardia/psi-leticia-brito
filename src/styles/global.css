@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 html {
-  @apply w-full h-full scroll-smooth;
+  @apply w-full scroll-smooth;
 
   ::-webkit-scrollbar {
     width: 0.5rem;
@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  @apply w-full h-full;
+  @apply w-full min-h-screen;
 }
 
 html,

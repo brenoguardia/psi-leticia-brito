@@ -6,8 +6,8 @@ const reflectionsData = REFLECTIONS_MOCK;
 ---
 
 <SectionContent
-  theme="light"
-  class="bg-editorial-surface-container-lowest py-24"
+  theme="dark"
+  class="bg-transparent py-24"
   id="depoimentos"
 >
   <div class="mx-auto max-w-7xl px-8">
@@ -21,10 +21,10 @@ const reflectionsData = REFLECTIONS_MOCK;
       {
         reflectionsData.reflections.map((item, index) => (
           <div
-            class={`relative overflow-hidden rounded-[2rem] p-12 shadow-sm transition-shadow hover:shadow-md ${
+            class={`relative overflow-hidden rounded-[2rem] p-12 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md ${
               index % 2 === 0
-                ? "bg-editorial-surface-bright"
-                : "bg-editorial-surface-container-low"
+                ? "bg-editorial-surface-bright/30"
+                : "bg-editorial-surface-container-low/30"
             }`}
           >
             <div

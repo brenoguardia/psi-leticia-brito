@@ -7,8 +7,8 @@ const processData = PROCESS_MOCK;
 ---
 
 <SectionContent
-  theme="light"
-  class="bg-editorial-surface-container-lowest py-24"
+  theme="dark"
+  class="bg-transparent py-24"
   id="atendimento"
 >
   <div class="mx-auto max-w-7xl px-8">
@@ -24,7 +24,7 @@ const processData = PROCESS_MOCK;
     <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
       {
         processData.steps.map((step, index) => (
-          <div class="group relative rounded-xl p-8 transition-all duration-300 hover:bg-editorial-surface-container-low">
+          <div class="group relative rounded-xl p-8 transition-all duration-300 hover:bg-editorial-surface-container-low/50">
             <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-editorial-primary-fixed text-editorial-primary-container transition-transform group-hover:scale-110">
               <Icon name={step.icon} class="size-8" />
             </div>
